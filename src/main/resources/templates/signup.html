@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <title>Add User</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+</head>
+
+<body>
+    <div style="padding:30px 0" class="container text-center">
+        <h1>Sign Up</h1>
+        <div class="container card text-center">
+            <form th:object="${signUp}" th:action="@{/saveuser}" action="#" method="post">
+                <div>
+                    <label> Username :<input type="text" th:field="*{username}" class="form-control" /></label>
+                    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</p>
+                </div>
+                <div>
+                    <label> Password :<input type="password" th:field="*{password}" class="form-control" /></label>
+                    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>
+                </div>
+                <div>
+                    <label> Re-type Password: <input type="password" th:field="*{passwordCheck}" class="form-control" /></label>
+                    <p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Password Match Error</p>
+                </div>
+
+                <input type="submit" class="btn btn-primary btn-sm" value="Sign Up"></input>
+            </form><br>
+            <div>
+                <a th:href="@{/login}" class="btn btn-outline-success btn-sm">Click Here to Sign In</a>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="container text-center">
+			Task Manager &copy; Eashin Matubber | HH No : 1703066
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    <title>Task</title>
+</head>
+
+<body>
+    <div class="container" style="padding:30px 0">
+        <div class="col-md-5">
+            <h1>Task Manager</h1>
+        </div>
+
+        <div class="col-md-5">
+            <h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+        </div>
+
+        <div class="col-md-5" style="padding:20px 0">
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out" class="btn btn-primary btn-sm" />
+            </form>
+        </div>
+        <div class="col">
+            <form style="padding:20px 0" th:action="@{/search}" th:object="${tasks}" method="get">
+                <input class="form-control bg-light" type="text" placeholder="Task Name" name="bytaskName" th:value="${bytaskName}" />
+
+                <input class="btn btn-sm btn-outline-secondary" type="submit" value="Search Task" />
+            </form>
+        </div>
+        <table class="table table-sm table-dark table-hover">
+            <tr>
+                <th>Edit</th>
+                <th>Task Name</th>
+                <th>Priority</th>
+                <th>Notes</th>
+                <th>Assigned To</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
+            </tr>
+
+            <tbody>
+                <tr th:each="task : ${tasks}">
+                    <td><a th:href="@{/edit/{id}(id=${task.id})}" class="btn btn-outline-primary btn-sm">Edit Task</a>
+                    <td th:text="${task.taskName}"></td>
+                    <td th:text="${task.priority}"></td>
+                    <td th:text="${task.notes}"></td>
+                    <td th:text="${task.username}"></td>
+                    <td th:text="${task.dueDate}"></td>
+                    <td th:text="${task.status}"></td>
+                    <td><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/delete/{id}(id=${task.id})}" class="btn btn-outline-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+            <a sec:authorize="hasAuthority('ADMIN')" href="/add" class="btn btn-success btn-sm">Add New Task</a>
+    </div>
+    
+    <footer>
+        <div class="container text-center">
+			Task Manager &copy; Eashin Matubber | HH No : 1703066
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <title>Task Manager </title>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<div style="padding:30px 0" class="container text-center">
+    <h1>Task Manager</h1>
+
+    <div class="container card text-center">
+        <h3>Sign In Here</h3>
+        <div class="col-sm-0 col-sm-offset-0">
+            <div class="alert alert-danger" th:if="${param.error}">
+                Invalid user name and/ or password. Please SIgn up to be a Member.
+            </div>
+            <div class="alert alert-warning" th:if="${param.logout}">
+                You have been logged out.
+            </div>
+            <form th:action="@{/login}" method="post">
+                <div><label> User Name : <input type="text" name="username" class="form-control" /> </label></div>
+                <div><label> Password: <input type="password" name="password" class="form-control" /> </label></div>
+                <div><input type="submit" value="Sign In" class="btn btn-success btn-sm"></input></div>
+            </form><br>
+            <div>
+                <a th:href="@{/signup}" class="btn btn-outline-primary btn-sm">Click Here to Sign Up</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+	<footer>
+        <div class="container text-center">
+			Task Manager &copy; Eashin Matubber | HH No : 1703066
+        </div>
+    </footer>
+
+</body>
+
+</html>

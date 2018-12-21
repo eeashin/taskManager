@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Task</title>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
+</head>
+
+<body>
+    <div class="container" style="padding:30px 0">
+        <h1>Edit Task </h1>
+
+        <form th:object="${task}" th:action="@{../save}" action="#" method="post">
+
+            <div class="form-group">
+
+                <div class="row">
+                    <div class="col">
+                        <input type="hidden" th:field="*{id}" class="form-control" />
+                        <label for="taskName"> Task Name :</label>
+                        <input class="form-control" type="text" id="taskName" placeholder="Task Name" th:field="*{taskName}"
+                            required />
+                    </div>
+                    <div class="col-sm">
+                        <label for="priorityList"> Priority:</label>
+                        <select class="form-control" id="priorityList" th:field="*{priority}">
+                            <option value="">Priority Level</option>
+                            <option th:each="priority: ${priorities}" th:value="${priority.priorityId}" th:text="${priority.priority}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <label for="notes"> Notes :</label>
+                <input class="form-control" type="text" id="notes" placeholder="Notes" th:field="*{notes}" />
+
+                <div class="row">
+                    <div class="col">
+                        <label for="userList"> Assigned To:</label>
+                        <select class="form-control" id="userList" th:field="*{username}">
+                            <option value="">Assignee Name </option>
+                            <option th:each="username: ${usernames}" th:value="${username.userId}" th:text="${username.username}"></option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="dueDate"> Due date :</label>
+                        <input class="form-control" type="date" id="dueDate" th:field="*{dueDate}" required />
+                    </div>
+                    <div class="col">
+                        <label for="statusList">Status :</label>
+                        <select class="form-control" id="statusList" th:field="*{status}">
+                            <option value="">Current Status</option>
+                            <option th:each="status: ${statuses}" th:value="${status.statusId}" th:text="${status.status}"></option>
+                        </select>
+                    </div>
+                </div>
+                <input type="submit" value="Save Task Data" class="btn btn-success btn-sm"></input>
+                <a href="/tasklist" class="btn btn-outline-success btn-sm">Return Back</a>
+            </div>
+        </form>
+    </div>
+    <footer>
+        <div class="container text-center">
+			Task Manager &copy; Eashin Matubber | HH No : 1703066
+        </div>
+    </footer>
+
+</body>
+
+</html>
