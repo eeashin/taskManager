@@ -25,9 +25,10 @@ public class UserRepositoryTest {
 
 	@Test
 	public void createUser() {
-		User user3 = new User("eashin", "$2a$04$W9/8o3R2mZ/fZ4DbsHXtWu4v1atTMvNFPdlqezfV6w0ZLT92VrnvC", "USER");
-		uRepo.save(user3);
-		assertThat(user3.getUserId()).isNotNull();
+		User testUser = new User("testUser", "$2a$04$W9/8o3R2mZ/fZ4DbsHXtWu4v1atTMvNFPdlqezfV6w0ZLT92VrnvC", "USER");
+		uRepo.save(testUser);
+		assertThat(testUser.getUsername()).isEqualTo("testUser");
+		assertThat(testUser.getUserId()).isNotNull();
 	}
 
 }

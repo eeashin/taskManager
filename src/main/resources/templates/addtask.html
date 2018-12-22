@@ -27,7 +27,7 @@
                         <label for="priorityList"> Priority:</label>
                         <select class="form-control" id="priorityList" th:field="*{priority}">
                             <option value="">Priority Level</option>
-                            <option th:each="priority: ${priorities}" th:value="${priority.priorityId}" th:text="${priority.priority}"></option>
+                            <option sec:authorize="hasAuthority('ADMIN')" th:each="priority: ${priorities}" th:value="${priority.priorityId}" th:text="${priority.priority}"></option>
                         </select>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                         <label for="userList"> Assigned To:</label>
                         <select class="form-control" id="userList" th:field="*{username}">
                             <option value="">Assignee Name </option>
-                            <option th:each="username: ${usernames}" th:value="${username.userId}" th:text="${username.username}"></option>
+                            <option sec:authorize="hasAuthority('ADMIN')" th:each="username: ${usernames}" th:value="${username.userId}" th:text="${username.username}"></option>
                         </select>
                     </div>
                     <div class="col">
@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <input type="submit" value="Save Task" class="btn btn-success btn-sm"></input>
-                <a sec:authorize="hasAuthority('ADMIN')" href="/tasklist" class="btn btn-outline-success btn-sm">Return Back</a>
+                <a href="/tasklist" class="btn btn-outline-success btn-sm">Return Back</a>
             </div>
         </form>
     </div>

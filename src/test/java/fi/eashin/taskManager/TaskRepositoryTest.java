@@ -31,21 +31,22 @@ public class TaskRepositoryTest {
 
 	@Test
 	public void createNewTask() {
-		Task task1 = (new Task("Server project", new Priority("High"), "Extended time",
+		Task task1 = (new Task("TestProject", new Priority("High"), "Extended time",
 				new User("tuser", "$2y$12$aQ3pEOJ2iRU7oZVZlaGBa.GJrn4PwlDdH8DFAtoTEjAPci8NrHUPy", "USER"), "2019-01-12",
 				new Status("In Progress")));
 		tRepo.save(task1);
 		assertThat(task1.getId()).isNotNull();
+		assertThat(task1.getTaskName()).isEqualTo("TestProject");
 	}
 
 	@Test
 	public void deleteTask() {
-		Task task2 = (new Task("Server project", new Priority("High"), "Extended time",
+		Task task2 = (new Task("TestProject", new Priority("High"), "Extended time",
 				new User("tuser", "$2y$12$aQ3pEOJ2iRU7oZVZlaGBa.GJrn4PwlDdH8DFAtoTEjAPci8NrHUPy", "USER"), "2019-01-12",
 				new Status("In Progress")));
 		tRepo.save(task2);
 		tRepo.delete(task2);
-		assertThat(task2.getTaskName()).isNull();
+		assertThat(tRepo.existsById(task2.getId())).isFalse();
 	}
 
 }

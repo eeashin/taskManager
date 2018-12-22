@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import fi.eashin.taskManager.domain.Priority;
 import fi.eashin.taskManager.domain.PriorityRepository;
 import fi.eashin.taskManager.domain.SignUp;
+import fi.eashin.taskManager.domain.Status;
 import fi.eashin.taskManager.domain.StatusRepository;
 import fi.eashin.taskManager.domain.Task;
 import fi.eashin.taskManager.domain.TaskRepository;
@@ -147,7 +149,7 @@ public class TaskController {
 	// RESTful service to get all tasks
 
 	@GetMapping("/tasks")
-	public @ResponseBody List<Task> taskListRest() {
+	public @ResponseBody List<Task> taskList() {
 		return (List<Task>) tRepo.findAll();
 
 	}
@@ -168,6 +170,18 @@ public class TaskController {
 	@GetMapping(value = "/users/{id}")
 	public @ResponseBody Optional<User> findUserRest(@PathVariable("id") Long userId) {
 		return uRepo.findById(userId);
+	}
+
+	// RESTful service to get priority list
+	@GetMapping(value = "/priorities")
+	public @ResponseBody List<Priority> getAllPriority() {
+		return (List<Priority>) pRepo.findAll();
+	}
+
+	// RESTful service to get statuses list
+	@GetMapping(value = "/statuses")
+	public @ResponseBody List<Status> getAllStatuses() {
+		return (List<Status>) sRepo.findAll();
 	}
 
 }
