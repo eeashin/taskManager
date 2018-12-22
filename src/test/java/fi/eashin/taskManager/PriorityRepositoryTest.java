@@ -29,9 +29,9 @@ public class PriorityRepositoryTest {
 
 	@Test
 	public void findByPriorityShouldReturnPriority() {
-		List<Priority> priorities = pRepo.findByPriority("Test");
-		assertThat(priorities.get(0)).isNotNull();
-		assertThat(priorities.get(0)).isEqualTo("Test");
+		List<Priority> priorities = pRepo.findByPriority("High");
+		assertThat(priorities).hasSize(1);
+		assertThat(priorities.get(0)).isEqualTo("High");
 	}
 
 }
